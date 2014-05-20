@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Map marker</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAuvnD4WuYWb50K27NmHhEgMvDyUXtbXWA&sensor=true"></script>
+    <script>
+
+var LntLagCenter = new google.maps.LatLng(33.65, 65.36); 
+
+function initialize() {
+  
+  var mapOptions = {
+    zoom: 4,
+    center: LntLagCenter,
+    mapTypeId : google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+                                mapOptions);
+
+  setMarkers(map);
+  
+
+}
+
+function setMarkers(map) { 
+        marker = new google.maps.Marker({
+        position: LntLagCenter,
+        animation: google.maps.Animation.DROP,
+        map: map
+    });
+        google.maps.event.addListener(marker, 'click', toggleBounce);
+  }
+
+  function toggleBounce() {
+
+  if (marker.getAnimation() != null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
