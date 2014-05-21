@@ -22,6 +22,13 @@ function initialize() {
 
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+  var aLayer = new google.maps.KmlLayer({
+   url: 'http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml'
+   });
+  aLayer.setMap(map);
+  
+  //두개의 kml파일이 뜨는지 확인해보았습니다. 그 결과 성공. 그런데 이 데이터가 여러개라면...좀....
+
   var ctaLayer = new google.maps.KmlLayer({
     url: 'https://sites.google.com/site/cybermediacampaign/mapfile/China.kml?attredirects=0&d=1.kml'
   });
