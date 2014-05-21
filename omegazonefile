@@ -27,12 +27,13 @@ function initialize() {
    });
   aLayer.setMap(map);
   
-  //두개의 kml파일이 뜨는지 확인해보았습니다. 그 결과 성공. 그런데 이 데이터가 여러개라면...좀....
 
-  var ctaLayer = new google.maps.KmlLayer({
+  var chinaLayer = new google.maps.KmlLayer({
     url: 'https://sites.google.com/site/cybermediacampaign/mapfile/China.kml?attredirects=0&d=1.kml'
   });
-  ctaLayer.setMap(map);
+  chinaLayer.setMap(map);
+  
+   //두개의 kml파일이 뜨는지 확인해보았습니다.(중국과 미국의 어느부분) 그 결과 성공. 그런데 이 데이터가 여러개라면...좀....
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
