@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Map marker</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAuvnD4WuYWb50K27NmHhEgMvDyUXtbXWA&sensor=true"></script>
+    <script>
+
+var LntLagCenter = new google.maps.LatLng(33.65, 65.36); 
+
+var lat;
+var lng;
+
+var iterator = 0;
+var markersArray = [];
+var map;
+var infowindow = new google.maps.InfoWindow();
+
+function initialize() {
+  lat = "32";
+  lng = "56";
+  var myLatLng = new google.maps.LatLng(lat,lng);
+  var mapOptions = {
+    zoom: 3,
+    center: LntLagCenter,
+    mapTypeId : google.maps.MapTypeId.ROADMAP
+  };
+    map = new google.maps.Map(document.getElementById('map-canvas'),
+                                mapOptions); 
+    
+    setMarkers(myLatLng);
+}
+
+function setMarkers(latlng) { 
+    marker = new google.maps.Marker({
+      position: latlng,
+      map: map,
+      animation: google.maps.Animation.DROP
+     });
+    markersArray.push(marker);
+
+      google.maps.event.addListener(marker, 'click', function(event){
+         popInfoWindow(latlng);
+        });
+     
+  }
+function popInfoWindow(latlng){
+var geocoder = new google.maps.Geocoder();
+    map.setCenter(latlng);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+  if (status == google.maps.GeocoderStatus.OK) {
+    if (results[1]) {
+      var contentString = 
+        '<div id = "content">' +
+        '<h1 id = "Heading" class = "Heading" >  </h1>' +
+        '<div id = "bodyContent">'+
+          '<p> Address :' + results[1].formatted_address+ '</p>'+
+          '<p> latitude, longitude : ' +'<b>' + lat +' '+ lng +'</b></p>' +
+          '<p> bibleStudyType : <b> true </b> </p>' +
+          '<p> contactEmail :  <b> gch3339@gmail.com </b> </p>'+
+          '<p> contactPhone : <b> 010-2051-6869</b> </p>' +
+          '<p> indigenousType: <b> true </b> </p>'+
+          '<p> youthType : <b> true </b> </p>'+
+        '</div>'+
+        '</div>';
+infowindow.setContent(contentString);
+infowindow.open(map, marker);
+        } 
+    }
+    });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
